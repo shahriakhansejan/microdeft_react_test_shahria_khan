@@ -4,17 +4,31 @@ import featureImg from "../../../assets/img/Authenticate/login.png";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
 import { Link } from "react-router-dom";
+import useAxiosPublic from "../../../hooks/useAxiosPublic";
+import Swal from "sweetalert2";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
+  const axiosPublic = useAxiosPublic();
   const {
     register,
     handleSubmit,
-    watch,
+    reset,
     formState: { errors },
   } = useForm();
-  
-  const onSubmit = (data) => console.log(data);
+
+  const onSubmit = (data) => {
+    console.log(data)
+    axiosPublic.post('/login', data)
+    .then(res => {
+      console.log(res.data.data.token);
+      if(res.data.data.token){
+        localStorage.setItem("access-token", res.data.data.token)
+        Swal.fire("Successfully LogIn!");
+        reset();
+      }
+    })
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-3">

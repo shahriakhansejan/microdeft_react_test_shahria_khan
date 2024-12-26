@@ -21,7 +21,8 @@ const Register = () => {
     axiosPublic.post('/register', data)
     .then(res => {
       console.log(res.data)
-      if(res.data){
+      if(res.data.data.token){
+        localStorage.setItem("access-token", res.data.data.token)
         Swal.fire("Successfully Registered!");
         reset();
       }
