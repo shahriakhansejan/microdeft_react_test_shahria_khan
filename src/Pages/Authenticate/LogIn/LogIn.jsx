@@ -3,13 +3,17 @@ import bgImg from "../../../assets/img/Authenticate/authentication.png";
 import featureImg from "../../../assets/img/Authenticate/login.png";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const axiosPublic = useAxiosPublic();
+  const {setUser} = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -18,16 +22,17 @@ const LogIn = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data)
-    axiosPublic.post('/login', data)
-    .then(res => {
-      console.log(res.data.data.token);
-      if(res.data.data.token){
-        localStorage.setItem("access-token", res.data.data.token)
+    console.log(data);
+    axiosPublic.post("/login", data).then((res) => {
+      if (res.data.data.user && res.data.data.token) {
+        localStorage.setItem("access-token", res.data.data.token);
+        localStorage.setItem( "currentUser", JSON.stringify(res.data.data.user))
+        setUser(res.data.data.user)
         Swal.fire("Successfully LogIn!");
         reset();
+        navigate('/')
       }
-    })
+    });
   };
 
   return (
@@ -44,7 +49,7 @@ const LogIn = () => {
             <h1 className="text-center my-6 font-bold neue text-5xl">
               LogIn Now !
             </h1>
-            
+
             {/* Email Field */}
             <div className="form-control">
               <label className="label">
@@ -71,7 +76,7 @@ const LogIn = () => {
                 <input
                   type={showPassword ? "text" : "password"}
                   {...register("password", {
-                    required: true
+                    required: true,
                   })}
                   name="password"
                   placeholder="Password"
@@ -95,15 +100,15 @@ const LogIn = () => {
 
             <div className="form-control mt-6">
               <input
-                className="btn btn-primary border-0 bg-[#daae6d] hover:bg-[#d6a04f] text-white"
+                className="btn btn-primary border-0 hover:bg-[#ed4321] mt-10 bg-[#FF3811] text-white"
                 type="submit"
                 value="LogIn"
               />
             </div>
           </form>
-          <p className="text-[#d6a04f] text-center mt-8 font-semibold">
+          <p className="orange text-center mt-8 font-semibold">
             New Here? Please{" "}
-            <Link className="font-bold text-sky-500" to="/register">
+            <Link className="font-bold text-sky-600" to="/register">
               Register
             </Link>
           </p>

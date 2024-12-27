@@ -1,10 +1,11 @@
 import { createBrowserRouter } from "react-router-dom";
 import Register from "../Pages/Authenticate/Register/Register";
 import LogIn from "../Pages/Authenticate/LogIn/LogIn";
-import Home from "../Pages/Home/Home";
-import Root from "../provider/Root"
 import Courses from "../Pages/Courses/Courses";
 import AddCourses from "../Pages/AddCourses/AddCourses";
+import Root from "../layout/root";
+import PrivateRoute from "./PrivateRoute";
+import Home from "../Pages/HomeElement/Home/Home";
 
 const router = createBrowserRouter([
   {
@@ -25,11 +26,11 @@ const router = createBrowserRouter([
       },
       {
         path: '/courses',
-        element: <Courses></Courses>
+        element: <PrivateRoute><Courses></Courses></PrivateRoute>
       },
       {
         path: '/add-courses',
-        element: <AddCourses></AddCourses>
+        element: <PrivateRoute><AddCourses></AddCourses></PrivateRoute>
       }
     ],
   },

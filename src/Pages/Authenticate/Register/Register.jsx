@@ -3,13 +3,17 @@ import bgImg from "../../../assets/img/Authenticate/authentication.png";
 import featureImg from "../../../assets/img/Authenticate/register.png";
 import { useState } from "react";
 import { IoIosEye, IoIosEyeOff } from "react-icons/io";
-import { Link } from "react-router-dom";
+import { Link, useNavigate } from "react-router-dom";
 import useAxiosPublic from "../../../hooks/useAxiosPublic";
 import Swal from "sweetalert2";
+import useAuth from "../../../hooks/useAuth";
 
 const Register = () => {
   const [showPassword, setShowPassword] = useState(false);
   const axiosPublic = useAxiosPublic();
+  const { setUser } = useAuth();
+  const navigate = useNavigate();
+
   const {
     register,
     handleSubmit,
@@ -17,17 +21,19 @@ const Register = () => {
     formState: { errors },
   } = useForm();
 
-  const onSubmit = data => {
-    axiosPublic.post('/register', data)
-    .then(res => {
-      console.log(res.data)
-      if(res.data.data.token){
-        localStorage.setItem("access-token", res.data.data.token)
+  const onSubmit = (data) => {
+    axiosPublic.post("/register", data).then((res) => {
+      console.log(res.data);
+      if (res.data.data.user && res.data.data.token) {
+        localStorage.setItem("access-token", res.data.data.token);
+        localStorage.setItem("currentUser", JSON.stringify(res.data.data.user));
+        setUser(res.data.data.user);
         Swal.fire("Successfully Registered!");
         reset();
+        navigate('/')
       }
-    })
-  }
+    });
+  };
 
   return (
     <div className="max-w-6xl mx-auto px-3">
@@ -37,7 +43,9 @@ const Register = () => {
       >
         <div className="w-full lg:w-1/2">
           <form onSubmit={handleSubmit(onSubmit)}>
-            <h1 className="text-center my-6 font-bold neue text-5xl">Register Here !</h1>
+            <h1 className="text-center my-6 font-bold neue text-5xl">
+              Register Here !
+            </h1>
 
             {/* Name Field */}
             <div className="form-control">
@@ -57,7 +65,7 @@ const Register = () => {
             {/* Email Field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Your Email</span>
+                <span className="dark3 font-medium">Your Email</span>
               </label>
               <input
                 type="email"
@@ -74,7 +82,7 @@ const Register = () => {
             {/* Password Field */}
             <div className="form-control">
               <label className="label">
-                <span className="label-text">Password</span>
+                <span className="dark3 font-medium">Password</span>
               </label>
               <div className="flex items-center">
                 <input
@@ -116,15 +124,15 @@ const Register = () => {
 
             <div className="form-control mt-6">
               <input
-                className="btn btn-primary border-0 bg-[#daae6d] hover:bg-[#d6a04f] text-white"
+                className="btn btn-primary border-0 hover:bg-[#ed4321] mt-10 bg-[#FF3811] text-white"
                 type="submit"
                 value="Register"
               />
             </div>
           </form>
-          <p className="text-[#d6a04f] text-center mt-8 font-semibold">
+          <p className="orange text-center mt-8 font-semibold">
             Already Registered? Go to{" "}
-            <Link className="font-bold text-green-500" to="/login">
+            <Link className="font-bold text-green-600" to="/login">
               Log In
             </Link>
           </p>
