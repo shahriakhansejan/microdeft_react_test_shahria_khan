@@ -100,7 +100,7 @@ const AddCourses = () => {
               </label>
             </div>
 
-            <div className="flex flex-col md:flex-row gap-0 md:gap-6">
+            <div className="flex gap-6">
               <label className="form-control w-full">
                 <div className="label">
                   <span className="font-semibold">
