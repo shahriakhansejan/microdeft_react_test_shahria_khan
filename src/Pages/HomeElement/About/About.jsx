@@ -1,4 +1,3 @@
-import React from "react";
 import img2 from "../../../assets/img/About/a.jpg";
 import img1 from "../../../assets/img/About/b.jpg";
 import { FaArrowRightLong } from "react-icons/fa6";

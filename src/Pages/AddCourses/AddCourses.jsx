@@ -3,7 +3,7 @@ import useAxiosSecure from "../../hooks/useAxiosSecure";
 // import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { MdAddCircle } from "react-icons/md";
 import Swal from "sweetalert2";
-import moment from "moment";
+// import moment from "moment";
 import useAuth from "../../hooks/useAuth";
 
 // const img_hosting_api =
@@ -31,17 +31,17 @@ const AddCourses = () => {
       badge_text: data.badge_text,
       badge_color: data.badge_color,
       // image: res.data.data.display_url,
-      created_at: moment().format("ddd, MMM D, YYYY h:mm A"),
-      author: {
-        name: user?.name,
-        email: user?.email,
-      },
+      // created_at: moment().format("ddd, MMM D, YYYY h:mm A"),
+      // author: {
+      //   name: user?.name,
+      //   email: user?.email,
+      // },
     };
 
-    console.log(newCourse);
+    // console.log(newCourse);
 
     const courseRes = await axiosSecure.post("/course", newCourse);
-    console.log(courseRes.data);
+    // console.log(courseRes.data);
 
     if (courseRes.data.data.id) {
       Swal.fire({
@@ -100,7 +100,7 @@ const AddCourses = () => {
               </label>
             </div>
 
-            <div className="flex gap-6">
+            <div className="flex flex-col md:flex-row gap-0 md:gap-6">
               <label className="form-control w-full">
                 <div className="label">
                   <span className="font-semibold">

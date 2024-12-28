@@ -16,10 +16,9 @@ body {
   font-family: "Bebas Neue", serif;
 }
 
-
 .activeNav a.active {
-    color: #FF3811;
-    text-decoration: underline;
+  color: #ff3811;
+  text-decoration: underline;
 }
 
 .dark1 {
@@ -35,7 +34,7 @@ body {
 }
 
 .orange {
-    color: #FF3811;
+  color: #ff3811;
 }
 
 .red {
@@ -43,79 +42,76 @@ body {
 }
 
 .green {
-    background-color: green;
+  background-color: green;
 }
 .blue {
-    background-color: blue;
+  background-color: blue;
 }
 .yellow {
-    background-color: orange;
+  background-color: orange;
 }
 .purple {
-    background-color: purple;
+  background-color: purple;
 }
-
-
 
 
 
 /* card Styles */
 .myCard {
-    background-color: white;
-    margin-bottom: 24px;
-    overflow: hidden;
-  }
-  
-  .cardImage {
-    width: 100%;
-    height: auto;
-    object-fit: cover;
-    transition: transform 0.3s ease-in-out;
-  }
-  
-  .cardImage:hover {
-    transform: scale(1.03);
-  }
-  
-  .badgeContainer {
-    display: flex;
-    justify-content: flex-end;
-    position: relative;
-  }
-  
-  .myCardBody {
-    padding: 25px;
-  }
-  
-  .myCardTitle {
-    font-size: 24px;
-    font-weight: 700;
-    color: #151515;
-  }
-  
-  .description {
-    color: #424242;
-    font-weight: 500;
-    margin-bottom: 15px;
-    margin-top: 4px;
-  }
-  
-  .cardActions {
-    margin-top: 12px;
-  }
-  
-  .detailsButton {
-    border: 2px solid #aaaaaa;
-    padding: 8px 16px;
-    width: 100%;
-    border-radius: 750px;
-    font-size: 12px;
-    font-weight: 600;
-    background-color: transparent;
-    color: #323232;
-  }
-  
-  .detailsButton:hover {
-    border-color: #FF3811;
-  }
-  
+  background-color: white;
+  margin-bottom: 24px;
+  overflow: hidden;
+}
+
+.cardImage {
+  width: 100%;
+  height: auto;
+  object-fit: cover;
+  transition: transform 0.3s ease-in-out;
+}
+
+.cardImage:hover {
+  transform: scale(1.03);
+}
+
+.badgeContainer {
+  display: flex;
+  justify-content: flex-end;
+  position: relative;
+}
+
+.myCardBody {
+  padding: 25px;
+}
+
+.myCardTitle {
+  font-size: 24px;
+  font-weight: 700;
+  color: #151515;
+}
+
+.description {
+  color: #424242;
+  font-weight: 500;
+  margin-bottom: 15px;
+  margin-top: 4px;
+}
+
+.cardActions {
+  margin-top: 12px;
+}
+
+.detailsButton {
+  border: 2px solid #aaaaaa;
+  padding: 8px 16px;
+  width: 100%;
+  border-radius: 750px;
+  font-size: 12px;
+  font-weight: 600;
+  background-color: transparent;
+  color: #323232;
+}
+
+.detailsButton:hover {
+  border-color: #ff3811;
+}

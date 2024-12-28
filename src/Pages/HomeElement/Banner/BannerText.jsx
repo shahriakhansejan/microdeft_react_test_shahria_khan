@@ -14,7 +14,7 @@ const BannerText = () => {
         </p>
       </div>
       <div className="pr-6 md:pr-0 pl-6 md:pl-16 flex gap-4">
-        <Link to='/courses'>
+        <Link to="/courses">
           <button className="border rounded hover:bg-[#FF3811] hover:border-[#FF3811] text-sm font-bold border-white px-3 py-2 text-white">
             All Courses
           </button>

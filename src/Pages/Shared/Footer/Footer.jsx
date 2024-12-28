@@ -1,4 +1,4 @@
-import React from "react";
+import moment from "moment";
 
 const Footer = () => {
   return (
@@ -6,7 +6,8 @@ const Footer = () => {
       <footer className="footer footer-center text-white p-4">
         <aside>
           <p>
-            Copyright © {new Date().getFullYear()} - All right reserved by MicroDeft Ltd
+            Copyright © {moment().format("YYYY")} - All rights reserved by
+            MicroDeft Ltd
           </p>
         </aside>
       </footer>

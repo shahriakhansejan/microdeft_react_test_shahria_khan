@@ -11,7 +11,7 @@ import useAuth from "../../../hooks/useAuth";
 const LogIn = () => {
   const [showPassword, setShowPassword] = useState(false);
   const axiosPublic = useAxiosPublic();
-  const {setUser} = useAuth();
+  const { setUser } = useAuth();
   const navigate = useNavigate();
 
   const {
@@ -22,15 +22,15 @@ const LogIn = () => {
   } = useForm();
 
   const onSubmit = (data) => {
-    console.log(data);
+    // console.log(data);
     axiosPublic.post("/login", data).then((res) => {
       if (res.data.data.user && res.data.data.token) {
         localStorage.setItem("access-token", res.data.data.token);
-        localStorage.setItem( "currentUser", JSON.stringify(res.data.data.user))
-        setUser(res.data.data.user)
+        localStorage.setItem("currentUser", JSON.stringify(res.data.data.user));
+        setUser(res.data.data.user);
         Swal.fire("Successfully LogIn!");
         reset();
-        navigate('/')
+        navigate("/");
       }
     });
   };

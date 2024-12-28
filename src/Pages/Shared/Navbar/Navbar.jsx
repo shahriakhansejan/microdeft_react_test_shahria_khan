@@ -1,4 +1,4 @@
-import React, { useState } from "react";
+import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
 import { NavLink } from "react-router-dom";
 import logoImg from "../../../assets/img/logo.png";
@@ -38,15 +38,18 @@ const Navbar = () => {
       <div className="navbar-start">
         <div className="dropdown">
           <div
-          onClick={() => setIsOpen(!isOpen)}
-          tabIndex={0} role="button" className="btn btn-ghost lg:hidden">
+            onClick={() => setIsOpen(!isOpen)}
+            tabIndex={0}
+            role="button"
+            className="btn btn-ghost lg:hidden"
+          >
             <AiOutlineMenu className="text-2xl" />
           </div>
           {isOpen && (
             <ul
-            onClick={()=> setIsOpen(false)}
+              onClick={() => setIsOpen(false)}
               tabIndex={0}
-              className="text-sm font-semibold flex flex-col gap-2 dark1 activeNav dropdown-content bg-white z-50 mt-3 w-36 p-4 shadow"
+              className="text-sm font-bold flex flex-col cinzel gap-2 dark1 activeNav dropdown-content bg-white z-50 mt-3 w-36 p-4 shadow"
             >
               {navMenu}
             </ul>

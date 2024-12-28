@@ -23,14 +23,14 @@ const Register = () => {
 
   const onSubmit = (data) => {
     axiosPublic.post("/register", data).then((res) => {
-      console.log(res.data);
+      // console.log(res.data);
       if (res.data.data.user && res.data.data.token) {
         localStorage.setItem("access-token", res.data.data.token);
         localStorage.setItem("currentUser", JSON.stringify(res.data.data.user));
         setUser(res.data.data.user);
         Swal.fire("Successfully Registered!");
         reset();
-        navigate('/')
+        navigate("/");
       }
     });
   };

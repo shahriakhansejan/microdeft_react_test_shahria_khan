@@ -1,11 +1,8 @@
-import useAuth from "../../hooks/useAuth";
 import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
 
 const Courses = () => {
   const axiosSecure = useAxiosSecure();
-  const { user } = useAuth();
-  console.log(user);
 
   const { data: courses = [] } = useQuery({
     queryKey: ["courses"],
@@ -59,11 +56,20 @@ const Courses = () => {
                     </button>
                   </div>
                 </div>
+
+                {/* Modal */}
                 <dialog id={`${course.id}`} className="modal">
-                  <div
-                    
-                    className="modal-box"
-                  >
+                  <div className="modal-box">
+                    <span className="flex justify-end">
+                      <button
+                        className="text-2xl text-red-500 font-medium"
+                        onClick={() =>
+                          document.getElementById(course.id).close()
+                        }
+                      >
+                        X
+                      </button>
+                    </span>
                     <h3 className="font-bold neue text-2xl dark2">
                       {course.title}
                     </h3>
@@ -71,13 +77,8 @@ const Courses = () => {
                       {course.description}
                     </p>
                     <p className="text-sky-500 font-mono">
-                      Created At: {course.created_at}
+                      Instructor: {course.instructor_name}
                     </p>
-                    <div className="modal-action">
-                      <form method="dialog">
-                        <button className="btn">Close</button>
-                      </form>
-                    </div>
                   </div>
                 </dialog>
               </div>
