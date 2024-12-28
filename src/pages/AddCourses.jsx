@@ -1,48 +1,23 @@
 import { useForm } from "react-hook-form";
-import useAxiosSecure from "../../hooks/useAxiosSecure";
-// import useAxiosPublic from "../../hooks/useAxiosPublic";
 import { MdAddCircle } from "react-icons/md";
 import Swal from "sweetalert2";
-// import moment from "moment";
-import useAuth from "../../hooks/useAuth";
-
-// const img_hosting_api =
-//   `https://api.imgbb.com/1/upload?key=${}`;
+import useAxiosSecure from "../hooks/useAxiosSecure";
 
 const AddCourses = () => {
-  //   const axiosPublic = useAxiosPublic();
   const axiosSecure = useAxiosSecure();
   const { register, handleSubmit, reset } = useForm();
-  const { user } = useAuth();
 
   const onSubmit = async (data) => {
-    // console.log(data)
-    // const imgFile = { image: data.image[0] };
-    // const res = await axiosPublic.post(img_hosting_api, imgFile, {
-    //   headers: {
-    //     "content-type": "multipart/form-data",
-    //   },
-    // });
-    // if (res.data.success) {
     const newCourse = {
       title: data.title,
       description: data.description,
       instructor_name: data.instructor_name,
       badge_text: data.badge_text,
-      badge_color: data.badge_color,
-      // image: res.data.data.display_url,
-      // created_at: moment().format("ddd, MMM D, YYYY h:mm A"),
-      // author: {
-      //   name: user?.name,
-      //   email: user?.email,
-      // },
+      badge_color: data.badge_color
     };
 
-    // console.log(newCourse);
 
     const courseRes = await axiosSecure.post("/course", newCourse);
-    // console.log(courseRes.data);
-
     if (courseRes.data.data.id) {
       Swal.fire({
         position: "top-end",
@@ -53,7 +28,7 @@ const AddCourses = () => {
       });
       reset();
     }
-    // }
+   
   };
 
   return (
@@ -153,15 +128,6 @@ const AddCourses = () => {
                 placeholder="Description..."
               ></textarea>
             </label>
-
-            {/* <div className="my-5">
-            <input
-              {...register("image", { required: true })}
-              name="image"
-              type="file"
-              className="file-input file-input-bordered w-full max-w-xs"
-            />
-          </div> */}
             <button className="flex mt-5 items-center gap-2 text-lg text-white font-bold px-5 py-3 hover:from-[#c82201] hover:to-[#FF3811] bg-gradient-to-r from-[#FF3811] to-[#c82201]">
               Add Course <MdAddCircle />{" "}
             </button>

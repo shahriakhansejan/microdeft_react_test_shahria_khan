@@ -1,36 +1,36 @@
 import { createBrowserRouter } from "react-router-dom";
-import Register from "../Pages/Authenticate/Register/Register";
-import LogIn from "../Pages/Authenticate/LogIn/LogIn";
-import Courses from "../Pages/Courses/Courses";
-import AddCourses from "../Pages/AddCourses/AddCourses";
 import PrivateRoute from "./PrivateRoute";
-import Home from "../Pages/HomeElement/Home/Home";
 import Root from "../layout/Root";
-import ErrorPage from "../ErrorPage/ErrorPage";
+import NotFound from "../components/NotFound/NotFound";
+import Home from "../pages/Home";
+import Register from "../pages/Register";
+import LogIn from "../pages/LogIn";
+import Courses from "../pages/Courses";
+import AddCourses from "../pages/AddCourses";
 
 const router = createBrowserRouter([
   {
     path: "/",
     element: <Root />,
-    errorElement: <ErrorPage/>,
+    errorElement: <NotFound/>,
     children: [
       {
         path: "/",
-        element: <Home></Home>,
+        element: <Home/>,
       },
       {
         path: "/register",
-        element: <Register></Register>,
+        element: <Register/>,
       },
       {
         path: "/login",
-        element: <LogIn></LogIn>,
+        element: <LogIn/>,
       },
       {
         path: "/courses",
         element: (
           <PrivateRoute>
-            <Courses></Courses>
+            <Courses/>
           </PrivateRoute>
         ),
       },
@@ -38,7 +38,7 @@ const router = createBrowserRouter([
         path: "/add-courses",
         element: (
           <PrivateRoute>
-            <AddCourses></AddCourses>
+            <AddCourses/>
           </PrivateRoute>
         ),
       },

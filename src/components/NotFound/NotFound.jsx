@@ -1,10 +1,10 @@
 import { Link, useNavigate } from "react-router-dom";
-import errorGif from "../assets/img/404.gif"
+import errorGif from "../../assets/img/404.gif"
 import { IoMdHome } from "react-icons/io";
 import { IoCaretBack } from "react-icons/io5";
 
 
-const ErrorPage = () => {
+const NotFound = () => {
     const navigate = useNavigate();
     return (
         <div className="container mx-auto">
@@ -22,4 +22,4 @@ const ErrorPage = () => {
 };
 
 
-export default ErrorPage;
+export default NotFound;

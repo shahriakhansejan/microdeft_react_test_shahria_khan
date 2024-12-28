@@ -1,16 +1,24 @@
-import useAxiosSecure from "../../hooks/useAxiosSecure";
 import { useQuery } from "@tanstack/react-query";
+import useAxiosSecure from "../hooks/useAxiosSecure";
+import { useState } from "react";
 
 const Courses = () => {
   const axiosSecure = useAxiosSecure();
+  const [page, setPage] = useState(1);
 
-  const { data: courses = [] } = useQuery({
-    queryKey: ["courses"],
+  const { data: courses = [], refetch } = useQuery({
+    queryKey: ["courses", page],
     queryFn: async () => {
-      const res = await axiosSecure.get("/course");
-      return res?.data?.data?.data;
+      const res = await axiosSecure.get(`/course?page=${page}`);
+      return res?.data?.data;
     },
   });
+
+  const handlePageChange = (pageNumber) => {
+    setPage(pageNumber);
+    refetch();
+  };
+
   return (
     <div className="bg-[#f3f3f3] min-h-screen">
       <div className="max-w-7xl mx-auto px-3">
@@ -22,9 +30,9 @@ const Courses = () => {
             Course Craft
           </h2>
         </div>
-        {courses.length ? (
+        {courses?.data?.length ? (
           <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-5 py-12">
-            {courses.map((course) => (
+            {courses?.data?.map((course) => (
               <div key={course.id} className="myCard">
                 <figure>
                   <img
@@ -73,12 +81,15 @@ const Courses = () => {
                     <h3 className="font-bold neue text-2xl dark2">
                       {course.title}
                     </h3>
-                    <p className="py-4 dark3 font-medium">
-                      {course.description}
-                    </p>
                     <p className="text-sky-500 font-mono">
                       Instructor: {course.instructor_name}
                     </p>
+                    <p className="py-4 dark3 font-medium">
+                      {course.description}
+                    </p>
+                    <h4 className="font-semibold text-green-600">Author : {course.author.name}</h4>
+                    <h5 className="text-sm text-yellow-600">{course.author.email}</h5>
+                    <p className="mt-5 text-end text-purple-500 text-xs font-medium"><span className="text-purple-600 mr-1 font-semibold">Created_At:</span> {course.created_at}</p>
                   </div>
                 </dialog>
               </div>
@@ -89,6 +100,20 @@ const Courses = () => {
             No Item to Show.....
           </h3>
         )}
+      </div>
+      <div className="flex justify-center py-3">
+        {Array.from(
+          { length: courses?.meta?.last_page },
+          (_, index) => index + 1
+        ).map((num) => (
+          <button
+            key={num}
+            onClick={() => handlePageChange(num)}
+            className={`join-item btn ${page === num ? "btn-active" : ""}`}
+          >
+            {num}
+          </button>
+        ))}
       </div>
     </div>
   );

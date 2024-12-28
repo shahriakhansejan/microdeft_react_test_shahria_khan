@@ -1,6 +1,6 @@
 import { useState } from "react";
 import { AiOutlineMenu } from "react-icons/ai";
-import { NavLink } from "react-router-dom";
+import { Link, NavLink } from "react-router-dom";
 import logoImg from "../../../assets/img/logo.png";
 import useAuth from "../../../hooks/useAuth";
 
@@ -49,15 +49,15 @@ const Navbar = () => {
             <ul
               onClick={() => setIsOpen(false)}
               tabIndex={0}
-              className="text-sm font-bold flex flex-col cinzel gap-2 dark1 activeNav dropdown-content bg-white z-50 mt-3 w-36 p-4 shadow"
+              className="text-sm font-bold flex flex-col gap-2 dark1 activeNav dropdown-content bg-white z-50 mt-3 w-36 p-4 shadow"
             >
               {navMenu}
             </ul>
           )}
         </div>
-        <img className="w-12" src={logoImg} alt="M" />
+        <Link to='/'><img className="w-12" src={logoImg} alt="MicroDeft" /></Link>
         <div className="hidden ml-12 lg:flex">
-          <ul className="flex gap-6 font-bold dark1 activeNav cinzel">
+          <ul className="flex gap-6 font-bold dark1 activeNav">
             {navMenu}
           </ul>
         </div>
@@ -71,9 +71,11 @@ const Navbar = () => {
             LogOut
           </button>
         ) : (
-          <button className="border rounded text-white bg-[#FF3811] text-xs font-bold border-[#FF3811] px-3 py-2 hover:text-[#FF3811] hover:bg-white">
-            LogIn
-          </button>
+          <Link to='/login'>
+            <button className="border rounded text-white bg-[#FF3811] text-xs font-bold border-[#FF3811] px-3 py-2 hover:text-[#FF3811] hover:bg-white">
+              LogIn
+            </button>
+          </Link>
         )}
       </div>
     </div>

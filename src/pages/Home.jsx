@@ -1,5 +1,6 @@
-import About from "../About/About";
-import Banner from "../Banner/Banner";
+import About from "../components/HomeElement/About/About";
+import Banner from "../components/HomeElement/Banner/Banner";
+
 
 const Home = () => {
   return (
